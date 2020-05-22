@@ -1,5 +1,8 @@
 package runnner;
+import org.junit.AfterClass;
 import org.junit.runner.RunWith;
+
+import StepDef.LoginNew;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 
@@ -10,5 +13,10 @@ import cucumber.api.junit.Cucumber;
               // tags= {"@regression","~@sanity"})
 
 public class Runner {
-
+	
+@AfterClass 
+public static void cleanUP() {
+	System.out.println("At After");
+	LoginNew.driver.quit();
+   }
 }

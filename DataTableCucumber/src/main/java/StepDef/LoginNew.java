@@ -12,41 +12,29 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 
-public class Login {
-	 WebDriver driver;	
+public class LoginNew {
+	 public static WebDriver driver;	
 	 
-	 @Before("@First")
-    public void tearUp(){
-	
-		System.setProperty("webdriver.chrome.driver","E:\\Driver\\chromedriver.exe");
-		this.driver=new ChromeDriver();
-		this.driver.get("https://opensource-demo.orangehrmlive.com/");
-	 }
+	 @Before
+		public void testPageTitle() 
+		{
+			System.out.println("At Before");
+			if(driver == null) {
+			
+			System.setProperty("webdriver.chrome.driver","E:\\Driver\\chromedriver.exe");
+			this.driver = new ChromeDriver();
+			this.driver.manage().window().maximize();
+			//this.driver.navigate().to("https://opensource-demo.orangehrmlive.com/");
+			}
+			else
+			{
+				System.out.println("same driver");	
+			}
+			
+		}
      
 	 
-     @After
-     public void tearDown() throws InterruptedException{
-    	boolean flag = driver.getPageSource().contains("Welcome Admin");
-    	
-    	if(flag)
-    	{
-    		System.out.println("Valid data..Login successful");
-    	
-    		//Logout
-    		driver.findElement(By.partialLinkText("Welcome Admin")).click();
-    		Thread.sleep(1000);
-    		driver.findElement(By.linkText("Logout")).click();
-    		
-    	}
-    	else
-    	{
-    		System.out.println("Invalid data..Login not successful");
-    	}
-    		
-    	//Thread.sleep(2000);
-    	//this.driver.quit();
-      }
-
+     
     
   
  @Given("^Open the chrome and launch the application$")
@@ -59,7 +47,7 @@ public class Login {
   @When("^nevigate the orange hrm page of orange hrm$")
   public void nevigate_the_orange_hrm_page_of_orange_hrm() throws Throwable {
     // Write code here that turns the phrase above into concrete actions
-	//driver.get("https://opensource-demo.orangehrmlive.com/");
+	driver.get("https://opensource-demo.orangehrmlive.com/");
  }
   
   @When("^Enter the username as \"([^\"]*)\" and password as \"([^\"]*)\"$")
@@ -81,7 +69,11 @@ public class Login {
   @Then("^see the welcome page$")
   public void see_the_welcome_page() throws Throwable {
     // Write code here that turns the phrase above into concrete actions
-	
+	//Logout
+		driver.findElement(By.partialLinkText("Welcome Admin")).click();
+		Thread.sleep(1000);
+		driver.findElement(By.linkText("Logout")).click();
+		
   }
 
   @Given("^i should nevigate the skill page$")

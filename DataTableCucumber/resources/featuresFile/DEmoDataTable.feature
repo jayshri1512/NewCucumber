@@ -2,7 +2,7 @@
 Feature: login with orange hrm
   I want to check login functionality of orange hrm various role
 
-@First
+
 Scenario: login of orange hrm with numbers of credential
     Given Open the chrome and launch the application    
     When nevigate the orange hrm page of orange hrm
